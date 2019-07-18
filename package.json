@@ -2,7 +2,7 @@
   "name": "genart-store",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Luchnik.github.io/store",
+  "homepage": "https://luchnik.github.io/store",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "node-sass": "^4.12.0",

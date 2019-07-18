@@ -1,9 +1,16 @@
 import React from 'react';
 
-function App() {
+import Navigation from './components/navigation/navigation.component';
+import HomePage from './pages/homepage/homepage.component';
+import './app.scss';
+
+const App = () => {
   return (
-    <div className="world">
-      Hello world
+    <div className="app-container">
+      <Navigation />
+      <main>
+        <HomePage />
+      </main>
     </div>
   );
 }

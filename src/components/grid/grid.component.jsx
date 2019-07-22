@@ -46,6 +46,7 @@ class Grid extends React.Component {
           this.state.items.map(({ id, title, price, imageUrl }) => (
             <Item
               key={id}
+              itemId={id}
               title={title}
               price={price}
               imageUrl={imageUrl} />

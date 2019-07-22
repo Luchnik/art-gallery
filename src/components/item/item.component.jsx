@@ -1,10 +1,13 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './item.styles.scss';
 
-const Item = ({ title, price, imageUrl }) => {
+const Item = ({ itemId, title, price, imageUrl, history, match }) => {
   return (
-    <div className="item-container">
+    <div
+      className="item-container"
+      onClick={() => history.push(`${match.url}${itemId}`)}>
       <div
         className="item-preview"
         style={{
@@ -19,4 +22,4 @@ const Item = ({ title, price, imageUrl }) => {
   );
 }
 
-export default Item;
+export default withRouter(Item);

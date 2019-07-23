@@ -1,0 +1,33 @@
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+      border: 1px solid #707070;
+      outline: none;
+      width: 220px;
+      height: 30px;
+      margin-bottom: 15px;
+      padding: 0 15px;
+    }
+  
+    input[type=submit] {
+      width: 120px;
+      margin: 0;
+      text-transform: uppercase;
+
+      &:hover {
+        background-color: #707070;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}

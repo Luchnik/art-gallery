@@ -15,7 +15,7 @@ const Item = ({ itemId, title, price, imageUrl, history, match }) => {
         }} />
 
       <div className="item-details">
-        <div className="title">{title.toUpperCase()}</div>
+        <div className="title">{title}</div>
         <div className="price">&#8372;{price}</div>
       </div>
     </div>

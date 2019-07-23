@@ -1,0 +1,18 @@
+.item-details-component {
+  display: flex;
+
+  .image-container {
+    width: 300px;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .item-data {
+    margin-left: 40px;
+
+    h2 {
+      text-transform: uppercase;
+    }
+  }
+}

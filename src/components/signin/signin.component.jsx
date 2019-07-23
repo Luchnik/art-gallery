@@ -22,7 +22,7 @@ class SignIn extends React.Component {
   render() {
     const { email, password } = this.state;
 
-    return(
+    return (
       <React.Fragment>
         <label>Sign in</label>
         <form onSubmit={this.handleSubmit}>

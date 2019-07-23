@@ -3,7 +3,7 @@
   height: 400px;
   display: flex;
   flex-direction: column;
-  margin: 15px;
+  margin: 0 15px 15px;
 
   .item-preview {
     width: 100%;
@@ -21,6 +21,7 @@
 
   .title {
     font-weight: bold;
+    text-transform: uppercase;
     color: #707070;
   }
 
@@ -36,7 +37,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   .item-container {
     width: calc(100% - 30px);
   }

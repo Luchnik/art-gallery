@@ -1,42 +1,28 @@
 import React from 'react';
 
+import { firestore } from '../../firebase';
 import Item from '../item/item.component';
 import './grid.styles.scss';
 
 class Grid extends React.Component {
   state = {
-    items: [
-      {
-        id: 1,
-        title: 'Lorem ipsum',
-        price: 255,
-        imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-      },
-      {
-        id: 2,
-        title: 'dolor sit amet',
-        price: 500,
-        imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-      },
-      {
-        id: 3,
-        title: 'consectetur adipiscing elit',
-        price: 325,
-        imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-      },
-      {
-        id: 4,
-        title: 'sed do eiusmod',
-        price: 740,
-        imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-      },
-      {
-        id: 5,
-        title: 'tempor incididunt',
-        price: 125,
-        imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-      }
-    ]
+    items: []
+  };
+
+  unsubscribeFromFirestore = null;
+
+  componentDidMount = () => {
+    this.unsubscribeFromFirestore = firestore.collection('Items').onSnapshot(snapshot => {
+      const items = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      this.setState({ items });
+    });
+  };
+
+  componentWillUnmount = () => {
+    this.unsubscribeFromFirestore();
   };
 
   render() {

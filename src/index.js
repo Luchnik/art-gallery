@@ -6,7 +6,7 @@ import './index.scss';
 import App from './App';
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/store">
     <App />
   </BrowserRouter>,
   document.getElementById('root')

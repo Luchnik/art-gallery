@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { auth, signInWithGoogle } from '../../firebase';
 import './signin.styles.scss';
 
 class SignIn extends React.Component {
@@ -9,10 +10,17 @@ class SignIn extends React.Component {
     password: ''
   };
 
-  handleSubmit = $event => {
+  handleSubmit = async $event => {
     $event.preventDefault();
 
-    this.setState({ email: '', password: '' });
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: '', password: '' });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   handleChange = $event => {
@@ -27,6 +35,7 @@ class SignIn extends React.Component {
     return (
       <div className="sign-in-container">
         <h2>Sign in</h2>
+        <p>I already have an account</p>
         <form onSubmit={this.handleSubmit}>
           <input
             name="email"
@@ -42,7 +51,14 @@ class SignIn extends React.Component {
             placeholder="Password"
             onChange={this.handleChange}
             required />
-          <input type="submit" value="Sign In" />
+          <div className="sign-in-options">
+            <input type="submit" value="Sign In" />
+            <button
+              className="btn google-signin"
+              onClick={signInWithGoogle}>
+              Sign In With Google
+            </button>
+          </div>
         </form>
       </div>
     )

@@ -1,0 +1,23 @@
+@import '../../assets/styles/colors';
+
+.custom-button {
+  height: 40px;
+  width: 240px;
+  display: block;
+  border: 1px solid $dark-red;
+  color: $dark-red;
+  outline: none;
+  font-size: 16px;
+  font-family: 'Archivo Narrow', sans-serif;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.google-login {
+    border: 1px solid $google-red;
+    background-color: $google-red;
+    color: $white;
+  }
+}

@@ -29,11 +29,11 @@ class Grid extends React.Component {
     return (
       <div className="grid-container">
         {
-          this.state.items.map(({ id, ...rest }) => (
+          this.state.items.map(({ id, ...restProps }) => (
             <Item
               key={id}
               itemId={id}
-              {...rest} />
+              {...restProps} />
           ))
         }
       </div>

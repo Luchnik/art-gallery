@@ -1,4 +1,4 @@
-@mixin gradiend-border($direction, $height, $primaryColor, $secondaryColor) {
+@mixin gradiend-border($direction, $height, $gradient) {
   border-#{$direction}: $height solid;
-  border-image: radial-gradient($primaryColor, $secondaryColor) 1;
+  border-image: $gradient;
 }

@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
-  @include gradiend-border(bottom, 1px, $black, $white);
+  @include gradiend-border(bottom, 1px, (radial-gradient($black, $white) 1));
 
   .wrapper {
     width: 100%;

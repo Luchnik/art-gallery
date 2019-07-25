@@ -12,9 +12,9 @@ const Header = ({ currentUser }) => {
 
         {
           currentUser ? (
-            <button onClick={() => auth.signOut()}>Sign Out</button>
+            <button onClick={() => auth.signOut()}>Log Out</button>
           ) : (
-            <Link to="/signin">Sign In</Link>
+            <Link to="/signin">Log In</Link>
           )
         }
       </div>

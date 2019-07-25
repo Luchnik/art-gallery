@@ -29,7 +29,7 @@
     p.description {
       margin-top: 10px;
       padding-bottom: 30px;
-      @include gradiend-border(bottom, 1px, $black, $white);
+      @include gradiend-border(bottom, 1px, (radial-gradient($black, $white) 1));
     }
   }
 }

@@ -1,9 +1,9 @@
+@import '../../assets/styles/colors';
+
 .item-container {
-  width: calc(100% / 3 - 30px);
   height: 400px;
   display: flex;
   flex-direction: column;
-  margin: 0 15px 15px;
 
   .item-preview {
     width: 100%;
@@ -20,25 +20,13 @@
   }
 
   .title {
+    color: $gray;
     font-weight: bold;
     text-transform: uppercase;
-    color: #707070;
   }
 
   &:hover {
     cursor: pointer;
-    opacity: 0.85;
-  }
-}
-
-@media screen and (max-width: 1281px) {
-  .item-container {
-    width: calc(100% / 2 - 30px);
-  }
-}
-
-@media screen and (max-width: 820px) {
-  .item-container {
-    width: calc(100% - 30px);
+    opacity: 0.8;
   }
 }

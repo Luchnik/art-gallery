@@ -1,18 +1,35 @@
-.item-details-component {
+@import '../../assets/styles/colors';
+@import '../../assets/styles/mixins';
+
+.item-details-container {
   display: flex;
 
   .image-container {
-    width: 300px;
+    min-width: 33%;
     height: 500px;
     background-size: cover;
     background-position: center;
+    margin-right: 30px;
   }
 
-  .item-data {
-    margin-left: 40px;
+  .item-description {
+    flex-grow: 1;
 
-    h2 {
+    h2.title {
+      color: $black;
       text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+  
+    label.price {
+      color: $gray;
+      font-size: 20px;
+    }
+
+    p.description {
+      margin-top: 10px;
+      padding-bottom: 30px;
+      @include gradiend-border(bottom, 1px, $black, $white);
     }
   }
 }

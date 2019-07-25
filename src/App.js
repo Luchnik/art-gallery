@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Navigation from './components/navigation/navigation.component';
+import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import ItemDetails from './pages/item-details/item-details.component';
 import Auth from './pages/auth/auth.component';
@@ -26,7 +26,7 @@ class App extends React.Component {
               id: userSnapshot.id,
               ...userSnapshot.data()
             }
-          }, () => console.log(this.state) );
+          });
         });
       } else {
         this.setState({ currentUser: userAuthData });
@@ -41,8 +41,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <Navigation currentUser={this.state.currentUser} />
-        <main className="main-section">
+        <Header currentUser={this.state.currentUser} />
+        <main className="main-container">
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/signin" component={Auth} />

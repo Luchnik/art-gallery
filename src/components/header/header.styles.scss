@@ -1,0 +1,28 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/mixins';
+
+.header-container {
+  width: 1000px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  @include gradiend-border(bottom, 1px, $black, $white);
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      color: $gray;
+      &:hover {
+        color: $black;
+        text-decoration: underline;
+      }
+    }
+  }
+}

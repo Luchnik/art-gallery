@@ -1,15 +1,9 @@
 .app-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
-  .main-section {
+  .main-container {
     width: 1000px;
-    margin: 15px auto;
-  }
-
-  @media screen and (max-width: 1281px) {
-    .main-section {
-      width: auto;
-    }
   }
 }

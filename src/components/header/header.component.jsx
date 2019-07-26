@@ -8,13 +8,24 @@ const Header = ({ currentUser }) => {
   return (
     <header className="header-container">
       <div className="wrapper">
-        <Link to="/" className="menu-item">Store</Link>
+        <Link
+          className="menu-item"
+          to="/">Store
+        </Link>
 
         {
           currentUser ? (
-            <button onClick={() => auth.signOut()}>Log Out</button>
+            <div
+              className="menu-item"
+              onClick={() => auth.signOut()}>
+              Log Out
+            </div>
           ) : (
-            <Link to="/signin">Log In</Link>
+            <Link
+              className="menu-item"
+              to="/signin">
+              Log In
+            </Link>
           )
         }
       </div>

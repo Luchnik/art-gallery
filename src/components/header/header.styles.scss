@@ -15,7 +15,8 @@
     display: flex;
     justify-content: space-between;
 
-    a {
+    .menu-item {
+      cursor: pointer;
       text-transform: uppercase;
       text-decoration: none;
       color: $gray;

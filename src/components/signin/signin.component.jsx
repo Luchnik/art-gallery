@@ -1,10 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import InputField from '../input-field/input-field.component';
 import Button from '../button/button.component';
 import { auth, signInWithGoogle } from '../../firebase/auth';
 
-class SignIn extends React.Component {
+class SignIn extends React.PureComponent {
 
   state = {
     email: '',
@@ -19,6 +20,7 @@ class SignIn extends React.Component {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: '', password: '' });
+      this.props.history.push('/');
     } catch (error) {
       console.error(error);
     }
@@ -67,4 +69,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

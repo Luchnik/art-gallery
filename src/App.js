@@ -9,6 +9,8 @@ import { auth } from './firebase/auth';
 import { createUserProfile } from './firebase/firestore';
 import './app.scss';
 
+export const UserContext = React.createContext(null);
+
 class App extends React.Component {
 
   state = {
@@ -41,16 +43,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
-        <Header currentUser={this.state.currentUser} />
-        <main className="main-container">
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/signin" component={SignInAndSignUp} />
-            <Route path="/:itemId" component={ItemDetails} />
-          </Switch>
-        </main>
-      </div>
+      <UserContext.Provider value={this.state.currentUser}>
+        <div className="app-container">
+          <Header currentUser={this.state.currentUser}/>
+          <main className="main-container">
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/signin" component={SignInAndSignUp} />
+              <Route path="/:itemId" component={ItemDetails} />
+            </Switch>
+          </main>
+        </div>
+      </UserContext.Provider>
     );
   }
 }

@@ -1,11 +1,12 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import InputField from '../input-field/input-field.component';
 import Button from '../button/button.component';
 import { auth } from '../../firebase/auth';
 import { createUserProfile } from '../../firebase/firestore';
 
-class SignUp extends React.Component {
+class SignUp extends React.PureComponent {
 
   state = {
     displayName: '',
@@ -34,6 +35,7 @@ class SignUp extends React.Component {
         password: '',
         confirmPassword: ''
       });
+      this.props.history.push('/');
     } catch (error) {
       console.error(error);
     }
@@ -82,7 +84,7 @@ class SignUp extends React.Component {
             required />
           <div className="button-group">
             <Button type="submit">
-              Sign  Up
+              Sign Up
             </Button>
           </div>
         </form>
@@ -91,4 +93,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

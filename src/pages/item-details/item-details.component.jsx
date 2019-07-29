@@ -1,17 +1,18 @@
 import React from 'react';
 
+import { withCurrentUser } from '../../hocs';
 import { firestore } from '../../firebase/firestore';
 import './item-details.styles.scss';
 
-class ItemDetails extends React.Component {
+class ItemDetails extends React.PureComponent {
 
   state = {};
 
   componentDidMount = () => {
-    const { match } = this.props;
+    const { match, currentUser } = this.props;
     const itemId = match.params.itemId;
 
-    const itemRef = firestore.doc(`Items/${itemId}`);
+    const itemRef = firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`);
     this.getItemDetails(itemRef);
   };
 
@@ -41,4 +42,4 @@ class ItemDetails extends React.Component {
   }
 }
 
-export default ItemDetails;
+export default withCurrentUser(ItemDetails);

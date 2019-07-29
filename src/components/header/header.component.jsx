@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { auth } from '../../firebase';
+import { signOut } from '../../firebase/auth';
 import './header.styles.scss';
 
 const Header = ({ currentUser }) => {
@@ -20,7 +20,7 @@ const Header = ({ currentUser }) => {
               <span className="display-name">{currentUser.displayName}</span>
               <div
                 className="menu-item"
-                onClick={() => auth.signOut()}>
+                onClick={signOut}>
                 Log Out
               </div>
             </React.Fragment>

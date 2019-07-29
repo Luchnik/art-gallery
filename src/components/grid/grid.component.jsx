@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { firestore } from '../../firebase';
+import { firestore } from '../../firebase/firestore';
 import Item from '../item/item.component';
 import './grid.styles.scss';
 

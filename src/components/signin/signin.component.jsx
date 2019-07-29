@@ -2,7 +2,7 @@ import React from 'react';
 
 import InputField from '../input-field/input-field.component';
 import Button from '../button/button.component';
-import { auth, signInWithGoogle } from '../../firebase';
+import { auth, signInWithGoogle } from '../../firebase/auth';
 
 class SignIn extends React.Component {
 

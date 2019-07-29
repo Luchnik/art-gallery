@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { firestore } from '../../firebase';
+import { firestore } from '../../firebase/firestore';
 import './item-details.styles.scss';
 
 class ItemDetails extends React.Component {

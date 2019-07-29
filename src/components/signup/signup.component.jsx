@@ -2,7 +2,8 @@ import React from 'react';
 
 import InputField from '../input-field/input-field.component';
 import Button from '../button/button.component';
-import { auth, createUserProfile } from '../../firebase';
+import { auth } from '../../firebase/auth';
+import { createUserProfile } from '../../firebase/firestore';
 
 class SignUp extends React.Component {
 

@@ -1,8 +1,8 @@
 {
-  "name": "genart-store",
+  "name": "art-gallery",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://luchnik.github.io/store",
+  "homepage": "https://luchnik.github.io/art-gallery",
   "dependencies": {
     "firebase": "^6.3.1",
     "gh-pages": "^2.0.1",

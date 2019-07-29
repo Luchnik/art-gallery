@@ -6,7 +6,7 @@ import './index.scss';
 import App from './App';
 
 ReactDOM.render(
-  <BrowserRouter basename="/store">
+  <BrowserRouter basename="/art-gallery">
     <App />
   </BrowserRouter>,
   document.getElementById('root')

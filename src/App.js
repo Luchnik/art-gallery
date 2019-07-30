@@ -43,18 +43,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <UserContext.Provider value={this.state.currentUser}>
-        <div className="app-container">
-          <Header currentUser={this.state.currentUser}/>
-          <main className="main-container">
+      <div className="app-container">
+        <Header currentUser={this.state.currentUser}/>
+        <main className="main-container">
+          <UserContext.Provider value={this.state.currentUser}>
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/signin" component={SignInAndSignUp} />
               <Route path="/:itemId" component={ItemDetails} />
             </Switch>
-          </main>
-        </div>
-      </UserContext.Provider>
+          </UserContext.Provider>
+        </main>
+      </div>
     );
   }
 }

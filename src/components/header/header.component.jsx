@@ -11,7 +11,7 @@ const Header = ({ currentUser }) => {
         <Link
           className="menu-item"
           to="/">
-          Gallery
+          Home
         </Link>
 
         <div className="user-data-container">

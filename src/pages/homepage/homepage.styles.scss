@@ -1,0 +1,35 @@
+@import '../../assets/styles/colors';
+
+.home-page-container {
+  position: relative;
+  height: 450px;
+
+  .jumbotron {
+    height: 100%;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 8px 8px $white inset;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+
+  .heading-container {
+    position: absolute;
+    top: 20px;
+    width: 40%;
+    height: 100px;
+    padding: 7px;
+    background-color: $white;
+    border-right: 3px solid $dark-red;
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 26px;
+      color: $dark-red;
+    }
+
+    p {
+      font-size: 18px;
+      letter-spacing: 0.8px;
+    }
+  }
+}

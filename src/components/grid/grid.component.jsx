@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { withCurrentUser } from '../../hocs';
 import { firestore } from '../../firebase/firestore';
 import Item from '../item/item.component';
 import './grid.styles.scss';
@@ -13,7 +12,7 @@ class Grid extends React.PureComponent {
   unsubscribeFromFirestore = null;
 
   componentDidMount = () => {
-    const { id: userId } = this.props.currentUser;
+    const userId = this.props.userId;
 
     this.unsubscribeFromFirestore = firestore.collection(`Users/${userId}/Gallery`).onSnapshot(snapshot => {
       const items = snapshot.docs.map(doc => ({
@@ -44,4 +43,4 @@ class Grid extends React.PureComponent {
   }
 }
 
-export default withCurrentUser(Grid);
+export default Grid;

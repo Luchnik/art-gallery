@@ -8,7 +8,7 @@ export const withCurrentUser = Component => {
       return (
         <UserContext.Consumer>
           {currentUser => (
-            currentUser && <Component currentUser={currentUser} {...this.props} />
+            <Component currentUser={currentUser} {...this.props} />
           )}
         </UserContext.Consumer>
       );

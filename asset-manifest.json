@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/art-gallery/static/css/main.a7663f83.chunk.css",
-    "main.js": "/art-gallery/static/js/main.1a0cdf0a.chunk.js",
-    "main.js.map": "/art-gallery/static/js/main.1a0cdf0a.chunk.js.map",
+    "main.js": "/art-gallery/static/js/main.513fe383.chunk.js",
+    "main.js.map": "/art-gallery/static/js/main.513fe383.chunk.js.map",
     "runtime~main.js": "/art-gallery/static/js/runtime~main.4e2534c9.js",
     "runtime~main.js.map": "/art-gallery/static/js/runtime~main.4e2534c9.js.map",
     "static/js/2.aa4216c9.chunk.js": "/art-gallery/static/js/2.aa4216c9.chunk.js",
     "static/js/2.aa4216c9.chunk.js.map": "/art-gallery/static/js/2.aa4216c9.chunk.js.map",
     "index.html": "/art-gallery/index.html",
-    "precache-manifest.f62a22afe5bfd2ac874ba6b4c9d9d72d.js": "/art-gallery/precache-manifest.f62a22afe5bfd2ac874ba6b4c9d9d72d.js",
+    "precache-manifest.8c39bbfac4fa6535604c97ef4ae8f5f7.js": "/art-gallery/precache-manifest.8c39bbfac4fa6535604c97ef4ae8f5f7.js",
     "service-worker.js": "/art-gallery/service-worker.js",
     "static/css/main.a7663f83.chunk.css.map": "/art-gallery/static/css/main.a7663f83.chunk.css.map",
     "static/media/jumbotron.jpeg": "/art-gallery/static/media/jumbotron.1d8e929f.jpeg"

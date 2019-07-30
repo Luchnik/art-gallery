@@ -20,7 +20,7 @@ const HomePage = ({ currentUser }) => {
         <p>Where your masterpieces are stored</p>
       </div>
       <div className="help-container">
-        <p>Please<Link className="log-in" to="/signin"> Log In </Link>to continue</p>
+        <p>Please <Link className="log-in" to="/signin">Log In</Link> to continue</p>
       </div>
     </div>
   );

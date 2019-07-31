@@ -1,10 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { signOut } from '../../firebase/auth';
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, history }) => {
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <header className="header-container">
       <div className="wrapper">
@@ -20,7 +30,7 @@ const Header = ({ currentUser }) => {
               <span className="display-name">{currentUser.displayName}</span>
               <div
                 className="menu-item"
-                onClick={signOut}>
+                onClick={handleSignOut}>
                 Log Out
               </div>
             </React.Fragment>
@@ -37,4 +47,4 @@ const Header = ({ currentUser }) => {
   );
 }
 
-export default Header;
+export default withRouter(Header);

@@ -26,6 +26,15 @@ class SignIn extends React.PureComponent {
     }
   };
 
+  handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      this.props.history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   handleChange = $event => {
     const { name, value } = $event.target;
 
@@ -58,7 +67,7 @@ class SignIn extends React.PureComponent {
               Log In
             </Button>
             <Button
-              onClick={signInWithGoogle}
+              onClick={this.handleGoogleSignIn}
               googleLogIn>
               Log In With Google
             </Button>

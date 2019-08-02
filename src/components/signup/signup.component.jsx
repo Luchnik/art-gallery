@@ -28,13 +28,6 @@ class SignUp extends React.PureComponent {
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
       await createUserProfile(user, { displayName });
-
-      this.setState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      });
       this.props.history.push('/');
     } catch (error) {
       console.error(error);

@@ -5,6 +5,7 @@ import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import ItemDetails from './pages/item-details/item-details.component';
 import SignInAndSignUp from './pages/signin-and-signup/signin-and-signup.component';
+import NewItem from './pages/new-item/new-item.component';
 import { auth } from './firebase/auth';
 import { createUserProfile } from './firebase/firestore';
 import './app.scss';
@@ -49,6 +50,7 @@ class App extends React.Component {
           <UserContext.Provider value={this.state.currentUser}>
             <Switch>
               <Route exact path="/" component={HomePage} />
+              <Route path="/new" component={NewItem} />
               <Route path="/signin" component={SignInAndSignUp} />
               <Route path="/:itemId" component={ItemDetails} />
             </Switch>

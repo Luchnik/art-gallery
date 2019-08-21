@@ -1,0 +1,10 @@
+.new-item-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+
+  h2 {
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+}

@@ -1,5 +1,23 @@
+@import '../../assets/styles/colors';
+
 .grid-container {
   display: grid;
   grid-gap: 30px;
   grid-template-columns: repeat(3, 1fr);
+
+  a.new-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px dotted $dark-red;
+    color: $dark-red;
+    font-size: 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 }

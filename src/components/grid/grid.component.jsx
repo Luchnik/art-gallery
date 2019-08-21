@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 import { firestore } from '../../firebase/firestore';
 import Item from '../item/item.component';
@@ -6,7 +7,8 @@ import './grid.styles.scss';
 
 class Grid extends React.PureComponent {
   state = {
-    items: []
+    items: [],
+    loading: true
   };
 
   unsubscribeFromFirestore = null;
@@ -19,7 +21,7 @@ class Grid extends React.PureComponent {
         id: doc.id,
         ...doc.data()
       }));
-      this.setState({ items });
+      this.setState({ items, loading: false });
     });
   };
 
@@ -28,19 +30,30 @@ class Grid extends React.PureComponent {
   };
 
   render() {
+    const { loading, items } = this.state;
+
+    if ( loading ) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div className="grid-container">
         {
-          this.state.items.map(({ id, ...restProps }) => (
+          items.map(({ id, ...restProps }) => (
             <Item
               key={id}
               itemId={id}
               {...restProps} />
           ))
         }
+        <Link
+          className="new-item"
+          to="/new">
+          Add new
+        </Link>
       </div>
     );
   }
 }
 
-export default Grid;
+export default withRouter(Grid);

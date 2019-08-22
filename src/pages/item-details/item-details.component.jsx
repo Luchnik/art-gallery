@@ -9,19 +9,34 @@ import './item-details.styles.scss';
 
 class ItemDetails extends React.PureComponent {
 
-  state = {};
+  state = {
+    item: {},
+    user: null,
+    loading: true
+  };
+
+  unsubscribeFromAuth = null;
 
   componentDidMount = () => {
-    const userId = auth.currentUser.uid;
-    const itemId = this.props.match.params.itemId;
-
-    const itemRef = firestore.doc(`Users/${userId}/Gallery/${itemId}`);
-    this.getItemDetails(itemRef);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ user }, () => {
+        const itemId = this.props.match.params.itemId;
+        const itemRef = firestore.doc(`Users/${user.uid}/Gallery/${itemId}`);
+        this.getItemDetails(itemRef);
+      });
+    });
   };
 
   getItemDetails = async itemRef => {
     const doc = await itemRef.get();
-    doc.exists && this.setState({ ...doc.data() });
+    doc.exists && this.setState({
+      item: { ...doc.data() },
+      loading: false
+    });
+  };
+
+  componentWillUnmount = () => {
+    this.unsubscribeFromAuth();
   };
 
   deleteItem = async () => {
@@ -37,7 +52,15 @@ class ItemDetails extends React.PureComponent {
   };
 
   render() {
-    const { title, price, imageUrl, rating, description } = this.state;
+    const {
+      item: { title, price, imageUrl, rating, description },
+      loading,
+      user
+    } = this.state;
+
+    if ( loading || !user ) {
+      return <div>Loading...</div>
+    }
 
     return (
       <div className="item-details-container">

@@ -39,6 +39,12 @@ class Artists extends React.PureComponent {
 
     return (
       <div className="artists-container">
+        <div className="hints">
+          <div className="rating">rating</div>
+          <div className="displayName">display name</div>
+          <div className="email">email</div>
+          <div className="createdAt">created at</div>
+        </div>
         {
           artists.map(({ id, displayName, email, rating, createdAt }) => (
             <div

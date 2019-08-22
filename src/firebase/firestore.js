@@ -29,6 +29,7 @@ export const createUserProfile = async (userAuthData, otherUserData) => {
       await userRef.set({
         displayName,
         email,
+        rating: 0,
         createdAt: new Date(),
         ...otherUserData
       });

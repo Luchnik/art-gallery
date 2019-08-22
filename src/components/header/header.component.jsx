@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
+import Button from '../button/button.component';
 import { signOut } from '../../firebase/auth';
 import './header.styles.scss';
 
-const Header = ({ currentUser, history }) => {
+const Header = ({ currentUser, history, location }) => {
 
   const handleSignOut = async () => {
     try {
@@ -18,20 +19,42 @@ const Header = ({ currentUser, history }) => {
   return (
     <header className="header-container">
       <div className="wrapper">
-        <Link
-          className="menu-item"
-          to="/">
-          Home
-        </Link>
+        <div className="navigation-container">
+          <Link
+            className="menu-item"
+            to="/">
+            {currentUser ? 'My Gallery' : 'Home'}
+          </Link>
 
-        <div className="user-data-container">
+          <Link
+            className="menu-item"
+            to="/artists">
+            Artists
+          </Link>
+        </div>
+
+        <div className="user-container">
           {currentUser ? (
             <React.Fragment>
-              <span className="display-name">{currentUser.displayName}</span>
-              <div
-                className="menu-item"
-                onClick={handleSignOut}>
-                Log Out
+              {
+                location.pathname !== '/new' &&
+                  <Button
+                    type="button"
+                    small
+                    onClick={() => history.push('/new')}
+                    styleType="primary">
+                    Add new
+                  </Button>
+              }
+              <div className="user-data-container">
+                <div className="display-name">
+                  {currentUser.displayName} - <span className="rating">&#9733;{currentUser.rating}</span>
+                </div>
+                <div
+                  className="menu-item"
+                  onClick={handleSignOut}>
+                  Log Out
+                </div>
               </div>
             </React.Fragment>
           ) : (

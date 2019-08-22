@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
 
-import { firestore } from '../../firebase/firestore';
 import Item from '../item/item.component';
+import { firestore } from '../../firebase/firestore';
 import './grid.styles.scss';
 
 class Grid extends React.PureComponent {
@@ -46,14 +45,9 @@ class Grid extends React.PureComponent {
               {...restProps} />
           ))
         }
-        <Link
-          className="new-item"
-          to="/new">
-          Add new
-        </Link>
       </div>
     );
   }
 }
 
-export default withRouter(Grid);
+export default Grid;

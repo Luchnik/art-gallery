@@ -1,0 +1,42 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/mixins';
+
+.artists-container {
+  display: flex;
+  flex-direction: column;
+
+  .artist {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    font-size: 20px;
+    @include gradiend-border(bottom, 1px, (radial-gradient($black, $white) 1));
+
+    .displayName {
+      width: 30%;
+      color: $dark-red;
+      text-transform: uppercase;
+
+      span {
+        color: $gray;
+        font-size: 13px;
+      }
+    }
+
+    .rating {
+      width: 10%;
+      color: $rating;
+      font-weight: bold;
+    }
+
+    .email {
+      width: 35%;
+    }
+
+    .createdAt {
+      width: 25%;
+      text-align: right;
+    }
+  }
+}

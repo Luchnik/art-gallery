@@ -14,11 +14,11 @@
     text-transform: uppercase;
   }
 
-  .displayName {
+  .display-name {
     width: 30%;
   }
 
-  .rating {
+  .user-rating {
     width: 10%;
   }
 
@@ -26,7 +26,7 @@
     width: 35%;
   }
 
-  .createdAt {
+  .created-at {
     width: 25%;
     text-align: right;
   }
@@ -38,7 +38,7 @@
     font-size: 20px;
     @include gradiend-border(bottom, 1px, (radial-gradient($black, $white) 1));
 
-    .displayName {
+    .display-name {
       color: $dark-red;
       text-transform: uppercase;
 
@@ -46,11 +46,6 @@
         color: $gray;
         font-size: 13px;
       }
-    }
-
-    .rating {
-      color: $rating;
-      font-weight: bold;
     }
   }
 }

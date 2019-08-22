@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
+import Rating from '../rating/rating.component';
 import Button from '../button/button.component';
 import { signOut } from '../../firebase/auth';
 import './header.styles.scss';
@@ -48,7 +49,8 @@ const Header = ({ currentUser, history, location }) => {
               }
               <div className="user-data-container">
                 <div className="display-name">
-                  {currentUser.displayName} - <span className="rating">&#9733;{currentUser.rating}</span>
+                  <Rating rating={currentUser.rating} />
+                  {currentUser.displayName}
                 </div>
                 <div
                   className="menu-item"

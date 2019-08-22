@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import Rating from '../../components/rating/rating.component';
 import Button from '../../components/button/button.component';
 import { firestore } from '../../firebase/firestore';
 import { auth } from '../../firebase/auth';
@@ -36,7 +37,7 @@ class ItemDetails extends React.PureComponent {
   };
 
   render() {
-    const { title, price, imageUrl, description } = this.state;
+    const { title, price, imageUrl, rating, description } = this.state;
 
     return (
       <div className="item-details-container">
@@ -47,9 +48,18 @@ class ItemDetails extends React.PureComponent {
           }} />
 
         <div className="item-description">
-          <h2 className="title">{title}</h2>
-          <label className="price">&#8372;{price}</label>
-          <p className="description">{description}</p>
+          <h2 className="title">
+            {title}
+          </h2>
+          <label className="item-rating">
+            <Rating rating={rating} />
+          </label>
+          <label className="price">
+            &#8372; {price}
+          </label>
+          <p className="description">
+            {description}
+          </p>
           <div className="action-buttons">
             <Button
               type="submit"

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Rating from '../../components/rating/rating.component';
 import { firestore } from '../../firebase/firestore';
 import { auth } from '../../firebase/auth';
 import './artists.styles.scss';
@@ -36,23 +37,27 @@ class Artists extends React.PureComponent {
       return <div>Loading...</div>
     }
 
+    if ( !artists.length ) {
+      return <div>No artists</div>
+    }
+
     return (
       <div className="artists-container">
         <div className="hints">
-          <div className="rating">rating</div>
-          <div className="displayName">display name</div>
+          <div className="user-rating">rating</div>
+          <div className="display-name">display name</div>
           <div className="email">email</div>
-          <div className="createdAt">created at</div>
+          <div className="created-at">created at</div>
         </div>
         {
           artists.map(({ id, displayName, email, rating, createdAt }) => (
             <div
               key={id}
               className="artist">
-              <div className="rating">
-                &#9733; {rating}
+              <div className="user-rating">
+                <Rating rating={rating} />
               </div>
-              <div className="displayName">
+              <div className="display-name">
                 {displayName}
                 {
                   auth.currentUser ? <span>{auth.currentUser.uid === id ? ' (you)' : ''}</span> : ''
@@ -61,7 +66,7 @@ class Artists extends React.PureComponent {
               <div className="email">
                 {email}
               </div>
-              <div className="createdAt">
+              <div className="created-at">
                 {new Date(createdAt.seconds * 1000).toDateString()}
               </div>
             </div>

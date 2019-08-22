@@ -1,33 +1,35 @@
-.new-item-container {
+.new-item-form {
   display: flex;
   flex-direction: column;
-  padding-top: 80px;
 
-  h2 {
-    text-align: center;
-    margin-bottom: 35px;
-    text-transform: uppercase;
-  }
-
-  .new-item-form {
+  .form-head {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    .inputs-container {
-      width: 30%;
-    }
-
-    .description-container {
-      width: 70%;
-      padding-bottom: 15px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+  
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
     }
 
     .button-group {
-      width: 55%;
+      width: 300px;
       display: flex;
-      justify-content: space-evenly;
-      margin-top: 35px;
+      justify-content: space-between;
+    }
+  }
+
+  .inputs-container {
+    display: flex;
+
+    .inputs {
+      width: 30%;
+    }
+  
+    .description-container {
+      width: 70%;
+      padding-bottom: 15px;
     }
   }
 }

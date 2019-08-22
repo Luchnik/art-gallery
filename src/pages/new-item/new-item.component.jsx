@@ -47,13 +47,31 @@ class NewItem extends React.PureComponent {
     const { title, price, imageUrl, description } = this.state;
 
     return (
-      <div className="new-item-container">
+      <form
+        className="new-item-form"
+        onSubmit={this.handleSubmit}>
 
-        <h2>Add new item</h2>
-        <form
-          className="new-item-form"
-          onSubmit={this.handleSubmit}>
-          <div className="inputs-container">
+        <div className="form-head">
+          <h2>Add new piece</h2>
+          <div className="button-group">
+            <Button
+              type="submit"
+              small
+              styleType="primary">
+              Add
+            </Button>
+            <Button
+              type="button"
+              small
+              onClick={() => this.resetFields() }
+              styleType="secondary">
+              Clear
+            </Button>
+          </div>
+        </div>
+
+        <div className="inputs-container">
+          <div className="inputs">
             <InputField
               name="title"
               type="text"
@@ -85,21 +103,8 @@ class NewItem extends React.PureComponent {
               onInputChange={this.handleChange}
               required />
           </div>
-          <div className="button-group">
-            <Button
-              type="submit"
-              styleType="primary">
-              Add
-            </Button>
-            <Button
-              type="button"
-              onClick={() => this.resetFields() }
-              styleType="secondary">
-              Clear
-            </Button>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     );
   }
 }

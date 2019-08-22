@@ -31,5 +31,12 @@
       padding-bottom: 30px;
       @include gradiend-border(bottom, 1px, (radial-gradient($black, $white) 1));
     }
+
+    .action-buttons {
+      width: 300px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
   }
 }

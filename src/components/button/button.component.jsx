@@ -2,7 +2,7 @@ import React from 'react';
 
 import './button.styles.scss';
 
-const Button = ({ children, outlineColor, styleType, ...otherProps }) => {
+const Button = ({ children, outlineColor, small, styleType, ...otherProps }) => {
 
   let styleTypeClass = '';
 
@@ -21,7 +21,7 @@ const Button = ({ children, outlineColor, styleType, ...otherProps }) => {
 
   return (
     <button
-      className={`custom-button ${styleTypeClass}`}
+      className={`custom-button ${styleTypeClass} ${small ? 'small' : ''}`}
       {...otherProps}>
       {children}
     </button>

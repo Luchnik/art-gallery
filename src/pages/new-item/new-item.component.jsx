@@ -1,8 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import InputField from '../../components/input-field/input-field.component';
 import Button from '../../components/button/button.component';
 import TextArea from '../../components/textarea/textarea.component';
+import { firestore } from '../../firebase/firestore';
+import { auth } from '../../firebase/auth';
 import './new-item.styles.scss';
 
 class NewItem extends React.PureComponent {
@@ -27,7 +30,13 @@ class NewItem extends React.PureComponent {
   handleSubmit = async $event => {
     $event.preventDefault();
 
-    console.log(this.state);
+    try {
+      const userId = auth.currentUser.uid;
+      await firestore.collection(`/Users/${userId}/Gallery`).add(this.state);
+      this.props.history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   resetFields = () => {
@@ -95,4 +104,4 @@ class NewItem extends React.PureComponent {
   }
 }
 
-export default NewItem;
+export default withRouter(NewItem);

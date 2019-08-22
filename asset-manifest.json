@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/art-gallery/static/css/main.0abd6287.chunk.css",
-    "main.js": "/art-gallery/static/js/main.f1df7ab3.chunk.js",
-    "main.js.map": "/art-gallery/static/js/main.f1df7ab3.chunk.js.map",
+    "main.css": "/art-gallery/static/css/main.5c79c48b.chunk.css",
+    "main.js": "/art-gallery/static/js/main.5500b0b5.chunk.js",
+    "main.js.map": "/art-gallery/static/js/main.5500b0b5.chunk.js.map",
     "runtime~main.js": "/art-gallery/static/js/runtime~main.4e2534c9.js",
     "runtime~main.js.map": "/art-gallery/static/js/runtime~main.4e2534c9.js.map",
     "static/js/2.fb503a90.chunk.js": "/art-gallery/static/js/2.fb503a90.chunk.js",
     "static/js/2.fb503a90.chunk.js.map": "/art-gallery/static/js/2.fb503a90.chunk.js.map",
     "index.html": "/art-gallery/index.html",
-    "precache-manifest.006097731892ecc7fd29e5586dba0196.js": "/art-gallery/precache-manifest.006097731892ecc7fd29e5586dba0196.js",
+    "precache-manifest.2f27763cbf5d8cae2aaa4f7a2830b547.js": "/art-gallery/precache-manifest.2f27763cbf5d8cae2aaa4f7a2830b547.js",
     "service-worker.js": "/art-gallery/service-worker.js",
-    "static/css/main.0abd6287.chunk.css.map": "/art-gallery/static/css/main.0abd6287.chunk.css.map",
+    "static/css/main.5c79c48b.chunk.css.map": "/art-gallery/static/css/main.5c79c48b.chunk.css.map",
     "static/media/jumbotron.jpeg": "/art-gallery/static/media/jumbotron.1d8e929f.jpeg"
   }
 }

@@ -31,9 +31,8 @@ class Artists extends React.PureComponent {
 
   render() {
     const { loading, artists } = this.state;
-    const userId = auth.currentUser.uid;
 
-    if ( loading ) {
+    if ( loading || !auth ) {
       return <div>Loading...</div>
     }
 
@@ -54,7 +53,10 @@ class Artists extends React.PureComponent {
                 &#9733; {rating}
               </div>
               <div className="displayName">
-                {displayName} <span>{userId === id ? '(you)' : ''}</span>
+                {displayName}
+                {
+                  auth.currentUser ? <span>{auth.currentUser.uid === id ? ' (you)' : ''}</span> : ''
+                }
               </div>
               <div className="email">
                 {email}

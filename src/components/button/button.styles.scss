@@ -4,8 +4,6 @@
   height: 40px;
   width: 240px;
   display: block;
-  border: 1px solid $dark-red;
-  color: $dark-red;
   background-color: $white;
   outline: none;
   font-size: 16px;
@@ -14,6 +12,16 @@
 
   &:hover {
     cursor: pointer;
+  }
+
+  &.primary {
+    border: 1px solid $dark-red;
+    color: $dark-red;
+  }
+
+  &.secondary {
+    border: 1px solid $gray;
+    color: $gray;
   }
 
   &.google-login {

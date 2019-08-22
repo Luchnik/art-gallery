@@ -62,12 +62,14 @@ class SignIn extends React.PureComponent {
             onInputChange={this.handleChange}
             required />
           <div className="button-group">
-            <Button type="submit">
+            <Button
+              type="submit"
+              styleType="primary">
               Log In
             </Button>
             <Button
               onClick={this.handleGoogleSignIn}
-              googleLogIn>
+              styleType="googleLogIn">
               Log In With Google
             </Button>
           </div>

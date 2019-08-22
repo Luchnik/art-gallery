@@ -76,7 +76,9 @@ class SignUp extends React.PureComponent {
             onInputChange={this.handleChange}
             required />
           <div className="button-group">
-            <Button type="submit">
+            <Button
+              type="submit"
+              styleType="primary">
               Sign Up
             </Button>
           </div>

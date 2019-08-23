@@ -1,5 +1,4 @@
 @import '../../assets/styles/colors';
-@import '../../assets/styles/mixins';
 
 .artists-container {
   display: flex;
@@ -12,40 +11,22 @@
     color: $gray;
     font-size: 13px;
     text-transform: uppercase;
-  }
-
-  .display-name {
-    width: 30%;
-  }
-
-  .user-rating {
-    width: 10%;
-  }
-
-  .email {
-    width: 35%;
-  }
-
-  .created-at {
-    width: 25%;
-    text-align: right;
-  }
-
-  .artist {
-    display: flex;
-    align-items: center;
-    height: 60px;
-    font-size: 20px;
-    @include gradiend-border(bottom, 1px, (radial-gradient($black, $white) 1));
 
     .display-name {
-      color: $dark-red;
-      text-transform: uppercase;
-
-      span {
-        color: $gray;
-        font-size: 13px;
-      }
+      width: 30%;
+    }
+  
+    .user-rating {
+      width: 10%;
+    }
+  
+    .email {
+      width: 35%;
+    }
+  
+    .created-at {
+      width: 25%;
+      text-align: right;
     }
   }
 }

@@ -1,0 +1,34 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/mixins';
+
+.artist {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  font-size: 20px;
+  @include gradiend-border(bottom, 1px, (radial-gradient($black, $white) 1));
+
+  .display-name {
+    width: 30%;
+    color: $dark-red;
+    text-transform: uppercase;
+
+    span {
+      color: $gray;
+      font-size: 13px;
+    }
+  }
+
+  .user-rating {
+    width: 10%;
+  }
+
+  .email {
+    width: 35%;
+  }
+
+  .created-at {
+    width: 25%;
+    text-align: right;
+  }
+}

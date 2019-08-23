@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Rating from '../../components/rating/rating.component';
+import Spinner from '../../components/spinner/spinner.component';
+import Artist from '../../components/artist/artist.component';
+import { withCurrentUser } from '../../hocs';
 import { firestore } from '../../firebase/firestore';
-import { auth } from '../../firebase/auth';
 import './artists.styles.scss';
 
 class Artists extends React.PureComponent {
   state = {
-    artists: [],
-    loading: true
+    artists: []
   };
 
   unsubscribeFromFirestore = null;
@@ -22,7 +22,7 @@ class Artists extends React.PureComponent {
 
       const sortedByRating = artists.sort( ( first, second ) => second.rating - first.rating );
 
-      this.setState({ artists: sortedByRating, loading: false });
+      this.setState({ artists: sortedByRating });
     });
   };
 
@@ -31,50 +31,37 @@ class Artists extends React.PureComponent {
   };
 
   render() {
-    const { loading, artists } = this.state;
+    const { artists } = this.state;
+    const { currentUser } = this.props;
 
-    if ( loading || !auth ) {
-      return <div>Loading...</div>
+    if (currentUser && !artists.length) {
+      return <h2>No artists</h2>
     }
 
-    if ( !artists.length ) {
-      return <div>No artists</div>
-    }
-
-    return (
-      <div className="artists-container">
-        <div className="hints">
-          <div className="user-rating">rating</div>
-          <div className="display-name">display name</div>
-          <div className="email">email</div>
-          <div className="created-at">created at</div>
+    if (currentUser && artists.length) {
+      return (
+        <div className="artists-container">
+          <div className="hints">
+            <div className="user-rating">rating</div>
+            <div className="display-name">display name</div>
+            <div className="email">email</div>
+            <div className="created-at">created at</div>
+          </div>
+          {
+            artists.map(({ id, ...restProps }) => (
+              <Artist
+                key={id}
+                userId={currentUser.id}
+                artistId={id}
+                {...restProps} />
+            ))
+          }
         </div>
-        {
-          artists.map(({ id, displayName, email, rating, createdAt }) => (
-            <div
-              key={id}
-              className="artist">
-              <div className="user-rating">
-                <Rating rating={rating} />
-              </div>
-              <div className="display-name">
-                {displayName}
-                {
-                  auth.currentUser ? <span>{auth.currentUser.uid === id ? ' (you)' : ''}</span> : ''
-                }
-              </div>
-              <div className="email">
-                {email}
-              </div>
-              <div className="created-at">
-                {new Date(createdAt.seconds * 1000).toDateString()}
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    );
+      );
+    }
+
+    return <Spinner />;
   }
 }
 
-export default Artists;
+export default withCurrentUser(Artists);

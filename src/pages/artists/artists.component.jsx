@@ -26,6 +26,10 @@ class Artists extends React.PureComponent {
     });
   };
 
+  onNameClick = artistId => {
+    console.log('onNameClick', artistId);
+  };
+
   componentWillUnmount = () => {
     this.unsubscribeFromFirestore();
   };
@@ -51,6 +55,7 @@ class Artists extends React.PureComponent {
             artists.map(({ id, ...restProps }) => (
               <Artist
                 key={id}
+                onNameClick={this.onNameClick}
                 userId={currentUser.id}
                 artistId={id}
                 {...restProps} />

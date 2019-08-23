@@ -10,10 +10,17 @@
 
   .display-name {
     width: 30%;
-    color: $dark-red;
-    text-transform: uppercase;
 
-    span {
+    span.value {
+      color: $dark-red;
+      text-transform: uppercase;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    span.indicator {
       color: $gray;
       font-size: 13px;
     }

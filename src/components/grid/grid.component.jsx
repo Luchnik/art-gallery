@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Spinner from '../spinner/spinner.component';
 import Item from '../item/item.component';
 import { firestore } from '../../firebase/firestore';
 import './grid.styles.scss';
@@ -32,7 +33,7 @@ class Grid extends React.PureComponent {
     const { loading, items } = this.state;
 
     if ( loading ) {
-      return <div>Loading...</div>
+      return <Spinner />
     }
 
     return (

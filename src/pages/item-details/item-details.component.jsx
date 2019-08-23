@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import Spinner from '../../components/spinner/spinner.component';
 import Rating from '../../components/rating/rating.component';
 import Button from '../../components/button/button.component';
 import { firestore } from '../../firebase/firestore';
@@ -59,7 +60,7 @@ class ItemDetails extends React.PureComponent {
     } = this.state;
 
     if ( loading || !user ) {
-      return <div>Loading...</div>
+      return <Spinner />
     }
 
     return (

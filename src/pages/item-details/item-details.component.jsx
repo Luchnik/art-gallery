@@ -5,30 +5,29 @@ import Spinner from '../../components/spinner/spinner.component';
 import Rating from '../../components/rating/rating.component';
 import Button from '../../components/button/button.component';
 import { firestore } from '../../firebase/firestore';
-import { auth } from '../../firebase/auth';
+import { withCurrentUser } from '../../hocs';
 import './item-details.styles.scss';
 
 class ItemDetails extends React.PureComponent {
 
   state = {
     item: {},
-    user: null,
     loading: true
   };
 
-  unsubscribeFromAuth = null;
-
   componentDidMount = () => {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ user }, () => {
-        const itemId = this.props.match.params.itemId;
-        const itemRef = firestore.doc(`Users/${user.uid}/Gallery/${itemId}`);
-        this.getItemDetails(itemRef);
-      });
-    });
+    const { currentUser } = this.props;
+    currentUser && this.getItemDetails();
   };
 
-  getItemDetails = async itemRef => {
+  componentDidUpdate = ( prevProps ) => {
+    prevProps.currentUser !== this.props.currentUser && this.getItemDetails();
+  };
+
+  getItemDetails = async () => {
+    const { currentUser } = this.props;
+    const itemId = this.props.match.params.itemId;
+    const itemRef = firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`);
     const doc = await itemRef.get();
     doc.exists && this.setState({
       item: { ...doc.data() },
@@ -36,16 +35,12 @@ class ItemDetails extends React.PureComponent {
     });
   };
 
-  componentWillUnmount = () => {
-    this.unsubscribeFromAuth();
-  };
-
   deleteItem = async () => {
-    const userId = auth.currentUser.uid;
+    const { currentUser } = this.props;
     const itemId = this.props.match.params.itemId;
 
     try {
-      await firestore.doc(`Users/${userId}/Gallery/${itemId}`).delete();
+      await firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`).delete();
       this.props.history.push('/');
     } catch( error ) {
       console.error(error);
@@ -53,13 +48,10 @@ class ItemDetails extends React.PureComponent {
   };
 
   render() {
-    const {
-      item: { title, price, imageUrl, rating, description },
-      loading,
-      user
-    } = this.state;
+    const { item: { title, price, imageUrl, rating, description }, loading } = this.state;
+    const { currentUser } = this.props;
 
-    if ( loading || !user ) {
+    if ( loading || !currentUser ) {
       return <Spinner />
     }
 
@@ -105,4 +97,4 @@ class ItemDetails extends React.PureComponent {
   }
 }
 
-export default withRouter(ItemDetails);
+export default withRouter(withCurrentUser(ItemDetails));

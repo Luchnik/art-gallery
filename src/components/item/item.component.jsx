@@ -4,10 +4,13 @@ import { withRouter } from 'react-router-dom';
 import './item.styles.scss';
 
 const Item = ({ itemId, title, price, imageUrl, history, match }) => {
+
+  const itemPushTarget = match.url === '/' ? itemId : `${match.url}/${itemId}`;
+
   return (
     <div
       className="item-container"
-      onClick={() => history.push(`${match.url}${itemId}`)}>
+      onClick={() => history.push(itemPushTarget)}>
       <div
         className="item-preview"
         style={{

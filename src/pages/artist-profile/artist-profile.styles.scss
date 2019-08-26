@@ -1,0 +1,11 @@
+@import '../../assets/styles/colors';
+
+.artists-data {
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: $dark-red;
+
+  .rating {
+    color: $rating-gold;
+  }
+}

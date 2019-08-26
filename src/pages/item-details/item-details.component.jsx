@@ -28,24 +28,29 @@ class ItemDetails extends React.PureComponent {
   };
 
   getItemDetails = async () => {
-    const { currentUser } = this.props;
-    const itemId = this.props.match.params.itemId;
-    const itemRef = firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`);
-    const doc = await itemRef.get();
-    doc.exists && this.setState({
-      item: { ...doc.data() },
-      loading: false
-    });
+    const { currentUser, match } = this.props;
+    const itemId = match.params.itemId;
+
+    try {
+      const itemRef = firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`);
+      const doc = await itemRef.get();
+      doc.exists && this.setState({
+        item: { ...doc.data() },
+        loading: false
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   deleteItem = async () => {
-    const { currentUser } = this.props;
-    const itemId = this.props.match.params.itemId;
+    const { currentUser, history, match } = this.props;
+    const itemId = match.params.itemId;
 
     try {
       await firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`).delete();
-      this.props.history.push('/');
-    } catch( error ) {
+      history.push('/');
+    } catch (error) {
       console.error(error);
     }
   };
@@ -72,13 +77,13 @@ class ItemDetails extends React.PureComponent {
 
   editItem = async () => {
     if (this.state.isEditing) {
-      const { currentUser } = this.props;
-      const itemId = this.props.match.params.itemId;
+      const { currentUser, match } = this.props;
+      const itemId = match.params.itemId;
 
       try {
         const itemRef = firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`);
         await itemRef.update(this.state.item);
-      } catch( error ) {
+      } catch (error) {
         console.error(error);
       }
     }

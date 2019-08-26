@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import Artists from './pages/artists/artists.component';
+import ArtistProfile from './pages/artist-profile/artist-profile.component';
 import ItemDetails from './pages/item-details/item-details.component';
 import SignInAndSignUp from './pages/signin-and-signup/signin-and-signup.component';
 import NewItem from './pages/new-item/new-item.component';
@@ -52,7 +53,8 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/new" component={NewItem} />
-              <Route path="/artists" component={Artists} />
+              <Route path="/artists" exact component={Artists} />
+              <Route path="/artists/:artistId" component={ArtistProfile} />
               <Route path="/signin" component={SignInAndSignUp} />
               <Route path="/:itemId" component={ItemDetails} />
             </Switch>

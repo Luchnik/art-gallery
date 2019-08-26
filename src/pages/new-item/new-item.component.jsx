@@ -13,6 +13,7 @@ class NewItem extends React.PureComponent {
   initialFormState = {
     title: '',
     price: '',
+    rating: 0,
     imageUrl: '',
     description: ''
   };

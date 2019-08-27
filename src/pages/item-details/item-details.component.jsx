@@ -90,6 +90,21 @@ class ItemDetails extends React.PureComponent {
     }));
   };
 
+  updateArtistsRating = async addRating => {
+    const { match } = this.props;
+    const artistId = match.params.artistId;
+
+    try {
+      const artistRef = firestore.doc(`Users/${artistId}`);
+      const doc = await artistRef.get();
+      const artistsData = { ...doc.data() };
+      artistsData.rating = artistsData.rating + addRating;
+      await artistRef.update(artistsData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   toggleLike = async () => {
     const { currentUser, match } = this.props;
     const { artistId, itemId } = match.params;
@@ -97,19 +112,28 @@ class ItemDetails extends React.PureComponent {
     try {
       const itemRef = firestore.doc(`Users/${artistId}/Gallery/${itemId}`);
       const ratedItem = { ...this.state.item };
+
+      let addRating = 0;
+
       if (ratedItem.likedBy.includes(currentUser.id)) {
         ratedItem.likedBy = ratedItem.likedBy.filter( value => {
           return value !== currentUser.id;
         });
+        addRating--;
       } else {
         ratedItem.likedBy = ratedItem.likedBy.concat(currentUser.id);
+        addRating++;
       }
+
       ratedItem.rating = ratedItem.likedBy.length;   
       await itemRef.update(ratedItem);
+
       this.setState(prevState => ({
         item: ratedItem,
         alreadyLiked: !prevState.alreadyLiked
       }));
+
+      this.updateArtistsRating(addRating);
     } catch (error) {
       console.error(error);
     }

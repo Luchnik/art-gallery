@@ -46,9 +46,7 @@ class SignUp extends React.PureComponent {
     return (
       <div className="sign-up-container">
         <h2>Sign Up</h2>
-        <form
-          noValidate
-          onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <InputField
             name="displayName"
             type="text"

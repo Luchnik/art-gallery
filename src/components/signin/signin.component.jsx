@@ -46,9 +46,7 @@ class SignIn extends React.PureComponent {
     return (
       <div className="sign-in-container">
         <h2>Log in</h2>
-        <form
-          noValidate
-          onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <InputField
             name="email"
             type="email"

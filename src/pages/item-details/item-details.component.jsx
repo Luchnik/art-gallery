@@ -15,12 +15,12 @@ class ItemDetails extends React.PureComponent {
   state = {
     item: {},
     loading: true,
-    isEditing: false
+    isEditing: false,
+    isMineItem: false
   };
 
   componentDidMount = () => {
-    const { currentUser } = this.props;
-    currentUser && this.getItemDetails();
+    this.getItemDetails();
   };
 
   componentDidUpdate = ( prevProps ) => {
@@ -29,14 +29,24 @@ class ItemDetails extends React.PureComponent {
 
   getItemDetails = async () => {
     const { currentUser, match } = this.props;
-    const itemId = match.params.itemId;
+    const { artistId, itemId } = match.params;
+
+    let docPath = '';
+    if ( artistId && itemId ) {
+      docPath = `Users/${artistId}/Gallery/${itemId}`;
+    } else if (currentUser) {
+      docPath = `Users/${currentUser.id}/Gallery/${itemId}`;
+    } else {
+      return;
+    }
 
     try {
-      const itemRef = firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`);
+      const itemRef = firestore.doc(docPath);
       const doc = await itemRef.get();
       doc.exists && this.setState({
         item: { ...doc.data() },
-        loading: false
+        loading: false,
+        isMineItem: !artistId
       });
     } catch (error) {
       console.error(error);
@@ -53,26 +63,6 @@ class ItemDetails extends React.PureComponent {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  showItemDetails = () => {
-    const { item: { title, price, rating, description } } = this.state;
-    return (
-      <React.Fragment>
-        <h2 className="title">
-          {title}
-        </h2>
-        <label className="item-rating">
-          <Rating rating={rating} />
-        </label>
-        <label className="price">
-          &#8372; {price}
-        </label>
-        <p className="description">
-          {description}
-        </p>
-      </React.Fragment>
-    );
   };
 
   editItem = async () => {
@@ -93,6 +83,10 @@ class ItemDetails extends React.PureComponent {
     }));
   };
 
+  likeItem = () => {
+    console.log('like');
+  };
+
   handleChange = $event => {
     const { name, value } = $event.target;
     const item = { ...this.state.item };
@@ -100,8 +94,9 @@ class ItemDetails extends React.PureComponent {
     this.setState({ item });
   };
 
-  showItemEdit = () => {
+  renderItemEdit = () => {
     const { item: { title, price, imageUrl, description } } = this.state;
+
     return (
       <div className="editing-container">
         <h2 className="title">
@@ -140,11 +135,68 @@ class ItemDetails extends React.PureComponent {
     );
   };
 
+  renderItemDetails = () => {
+    const { item: { title, price, rating, description } } = this.state;
+
+    return (
+      <React.Fragment>
+        <h2 className="title">
+          {title}
+        </h2>
+        <label className="item-rating">
+          <Rating rating={rating} />
+        </label>
+        <label className="price">
+          &#8372; {price}
+        </label>
+        <p className="description">
+          {description}
+        </p>
+      </React.Fragment>
+    );
+  };
+
+  renderActionButtons = () => {
+    const { isMineItem, isEditing } = this.state;
+
+    if ( isMineItem ) {
+      return (
+        <React.Fragment>
+          <Button
+            type="submit"
+            onClick={() => this.editItem()}
+            small
+            styleType="secondary">
+            {isEditing ? 'Done' : 'Edit'}
+          </Button>
+          <Button
+            type="submit"
+            onClick={() => this.deleteItem()}
+            small
+            styleType="primary">
+            Delete
+          </Button>
+        </React.Fragment>
+      );
+    }
+
+    if ( !isMineItem && this.props.currentUser ) {
+      return (
+        <Button
+          type="submit"
+          onClick={() => this.likeItem()}
+          small
+          styleType="like">
+          Like It
+        </Button>
+      );
+    }
+  };
+
   render() {
     const { item: { imageUrl }, loading, isEditing } = this.state;
-    const { currentUser } = this.props;
 
-    if ( loading || !currentUser ) {
+    if ( loading ) {
       return <Spinner />
     }
 
@@ -158,22 +210,9 @@ class ItemDetails extends React.PureComponent {
           }} />
 
         <div className="item-description">
-          {isEditing ? this.showItemEdit() : this.showItemDetails()}
+          {isEditing ? this.renderItemEdit() : this.renderItemDetails()}
           <div className="action-buttons">
-            <Button
-              type="submit"
-              onClick={() => this.editItem()}
-              small
-              styleType="secondary">
-              {isEditing ? 'Done' : 'Edit'}
-            </Button>
-            <Button
-              type="submit"
-              onClick={() => this.deleteItem()}
-              small
-              styleType="primary">
-              Delete
-            </Button>
+            { this.renderActionButtons() }
           </div>
         </div>
       </div>

@@ -23,6 +23,11 @@
     color: $dark-red;
   }
 
+  &.like {
+    border: 1px solid $rating-gold;
+    color: $rating-gold;
+  }
+
   &.secondary {
     border: 1px solid $gray;
     color: $gray;

@@ -51,12 +51,13 @@ class App extends React.Component {
         <main className="main-container">
           <UserContext.Provider value={this.state.currentUser}>
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route path="/" exact component={HomePage} />
               <Route path="/new" component={NewItem} />
               <Route path="/artists" exact component={Artists} />
-              <Route path="/artists/:artistId" component={ArtistProfile} />
+              <Route path="/artists/:artistId" exact component={ArtistProfile} />
+              <Route path="/artists/:artistId/:itemId" exact component={ItemDetails} />
               <Route path="/signin" component={SignInAndSignUp} />
-              <Route path="/:itemId" component={ItemDetails} />
+              <Route path="/:itemId" exact component={ItemDetails} />
             </Switch>
           </UserContext.Provider>
         </main>

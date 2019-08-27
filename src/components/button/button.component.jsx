@@ -8,14 +8,17 @@ const Button = ({ children, outlineColor, small, styleType, ...otherProps }) => 
 
   switch (styleType) {
     case 'primary':
-        styleTypeClass = 'primary';
-        break;
+      styleTypeClass = 'primary';
+      break;
     case 'secondary':
-        styleTypeClass = 'secondary';
-        break;
+      styleTypeClass = 'secondary';
+      break;
+    case 'like':
+      styleTypeClass = 'like';
+      break;
     case 'googleLogIn':
-        styleTypeClass = 'google-login';
-        break;
+      styleTypeClass = 'google-login';
+      break;
     default: styleTypeClass = '';
   }
 

@@ -24,7 +24,7 @@ class ArtistProfile extends React.Component {
         artist: { ...doc.data() },
         loading: false
       });
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   };

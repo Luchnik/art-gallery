@@ -11,7 +11,7 @@ const updateUserWithInitialGallery = userRef => {
       const galleryItemRef = userRef.collection('Gallery').doc();
       await galleryItemRef.set(galleryItem);
     });
-  } catch(error) {
+  } catch (error) {
     console.log('Error updating gallery', error.message);
   }
 };
@@ -36,7 +36,7 @@ export const createUserProfile = async (userAuthData, otherUserData) => {
 
       updateUserWithInitialGallery(userRef);
 
-    } catch(error) {
+    } catch (error) {
       console.log('Error creating user', error.message);
     }
   }

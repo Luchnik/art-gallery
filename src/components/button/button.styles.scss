@@ -33,6 +33,11 @@
     color: $gray;
   }
 
+  &.alreadyLiked {
+    background-color: $rating-gold;
+    color: $white;
+  }
+
   &.google-login {
     border: 1px solid $google-red;
     background-color: $google-red;

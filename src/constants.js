@@ -4,6 +4,7 @@ export const INITIAL_GALLERY = [
     price: 220,
     rating: 0,
     imageUrl: 'https://i.ibb.co/9YCqtqp/scream.jpg',
+    likedBy: [],
     description: 'His ad civibus nominavi torquatos. Ne mei semper lucilius sapientem. Duis verear id vim. Id pro aperiam intellegam, mandamus periculis id sea.'
   },
   {
@@ -11,6 +12,7 @@ export const INITIAL_GALLERY = [
     price: 740,
     rating: 0,
     imageUrl: 'https://i.ibb.co/Kx4dBzh/water.jpg',
+    likedBy: [],
     description: 'Et vix vidit assentior prodesset. Ad ipsum adipisci vim, vix eros deseruisse ei. No facete euripidis temporibus vel, posse iudico mea ex. In appareat dissentiet mel, eos an nibh prodesset deseruisse.'
   },
   {
@@ -18,6 +20,7 @@ export const INITIAL_GALLERY = [
     price: 550,
     rating: 0,
     imageUrl: 'https://i.ibb.co/zmp7FjJ/night.jpg',
+    likedBy: [],
     description: 'Omittam vivendum deserunt ei cum, mel ea omittantur liberavisse, ad nonumy mollis epicurei eam. Ea vis mundi tation. Ad vidisse virtute eloquentiam usu, an vim dolorem delicata oportere, ei mea omnes perpetua. Eum viderer legendos id, at iriure voluptatum cotidieque eam, te mucius disputando mei. Nobis affert abhorreant at sit.'
   },
   {
@@ -25,6 +28,7 @@ export const INITIAL_GALLERY = [
     price: 325,
     rating: 0,
     imageUrl: 'https://i.ibb.co/MnY8K1r/lake.jpg',
+    likedBy: [],
     description: 'Pri id accumsan delicata persecuti, ubique labores torquatos cu ius, omnis timeam ad quo. Everti disputando contentiones vim ne, sit at omnium option epicuri, id erant aliquip eruditi cum. Ut sea veniam deseruisse, sit paulo omnium no. Vel no nominavi deseruisse, vim case facer no, scripta bonorum ut nec. Vel nisl dolores omittantur no.'
   },
   {
@@ -32,6 +36,7 @@ export const INITIAL_GALLERY = [
     price: 255,
     rating: 0,
     imageUrl: 'https://i.ibb.co/JtfF43p/kiss.jpg',
+    likedBy: [],
     description: 'Eu dolorem liberavisse vix, ne vis zril invenire similique. Aeque doming officiis vim an, vis tritani praesent ne, his no erat dissentiunt. Molestie definiebas comprehensam mei at, no his semper honestatis. Erant essent placerat quo ne, usu alia iracundia an. Ne habeo ornatus mea, ex semper salutandi periculis pri.'
   }
 ];

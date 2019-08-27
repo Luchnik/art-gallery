@@ -47,7 +47,7 @@ class ArtistProfile extends React.Component {
           </label>
           {displayName} Gallery
         </div>
-        <Grid userId={artistId} />;
+        <Grid userId={artistId} />
       </React.Fragment>
     );
   }

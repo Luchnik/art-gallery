@@ -16,7 +16,8 @@ class ItemDetails extends React.PureComponent {
     item: {},
     loading: true,
     isEditing: false,
-    isMineItem: false
+    isMineItem: false,
+    alreadyLiked: false
   };
 
   componentDidMount = () => {
@@ -40,16 +41,22 @@ class ItemDetails extends React.PureComponent {
       return;
     }
 
-    try {
-      const itemRef = firestore.doc(docPath);
-      const doc = await itemRef.get();
-      doc.exists && this.setState({
-        item: { ...doc.data() },
-        loading: false,
-        isMineItem: !artistId
-      });
-    } catch (error) {
-      console.error(error);
+    if (currentUser) {
+      try {
+        const itemRef = firestore.doc(docPath);
+        const doc = await itemRef.get();
+        const item = { ...doc.data() }
+        const alreadyLiked = item.likedBy.includes(currentUser.id);
+
+        doc.exists && this.setState({
+          item,
+          loading: false,
+          isMineItem: !artistId,
+          alreadyLiked
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -83,8 +90,29 @@ class ItemDetails extends React.PureComponent {
     }));
   };
 
-  likeItem = () => {
-    console.log('like');
+  toggleLike = async () => {
+    const { currentUser, match } = this.props;
+    const { artistId, itemId } = match.params;
+
+    try {
+      const itemRef = firestore.doc(`Users/${artistId}/Gallery/${itemId}`);
+      const ratedItem = { ...this.state.item };
+      if (ratedItem.likedBy.includes(currentUser.id)) {
+        ratedItem.likedBy = ratedItem.likedBy.filter( value => {
+          return value !== currentUser.id;
+        });
+      } else {
+        ratedItem.likedBy = ratedItem.likedBy.concat(currentUser.id);
+      }
+      ratedItem.rating = ratedItem.likedBy.length;   
+      await itemRef.update(ratedItem);
+      this.setState(prevState => ({
+        item: ratedItem,
+        alreadyLiked: !prevState.alreadyLiked
+      }));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   handleChange = $event => {
@@ -157,7 +185,7 @@ class ItemDetails extends React.PureComponent {
   };
 
   renderActionButtons = () => {
-    const { isMineItem, isEditing } = this.state;
+    const { isMineItem, isEditing, alreadyLiked } = this.state;
 
     if ( isMineItem ) {
       return (
@@ -184,10 +212,11 @@ class ItemDetails extends React.PureComponent {
       return (
         <Button
           type="submit"
-          onClick={() => this.likeItem()}
+          onClick={() => this.toggleLike()}
           small
+          alreadyLiked={alreadyLiked}
           styleType="like">
-          Like It
+          {alreadyLiked ? 'Dislike It' : 'Like It'}
         </Button>
       );
     }

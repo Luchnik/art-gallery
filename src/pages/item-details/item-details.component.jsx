@@ -129,9 +129,9 @@ class ItemDetails extends React.PureComponent {
       this.setState(prevState => ({
         item: ratedItem,
         alreadyLiked: !prevState.alreadyLiked
-      }));
-
-      this.updateArtistsRating(addRating);
+      }), () => {
+        this.updateArtistsRating(addRating);
+      });
     } catch (error) {
       console.error(error);
     }

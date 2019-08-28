@@ -130,7 +130,7 @@ class ItemDetails extends React.PureComponent {
         item: ratedItem,
         alreadyLiked: !prevState.alreadyLiked
       }), () => {
-        this.updateArtistsRating(addRating);
+        // this.updateArtistsRating(addRating);
       });
     } catch (error) {
       console.error(error);

@@ -41,22 +41,20 @@ class ItemDetails extends React.PureComponent {
       return;
     }
 
-    if (currentUser) {
-      try {
-        const itemRef = firestore.doc(docPath);
-        const doc = await itemRef.get();
-        const item = { ...doc.data() }
-        const alreadyLiked = item.likedBy.includes(currentUser.id);
+    try {
+      const itemRef = firestore.doc(docPath);
+      const doc = await itemRef.get();
+      const item = { ...doc.data() }
+      const alreadyLiked = currentUser ? item.likedBy.includes(currentUser.id) : false;
 
-        doc.exists && this.setState({
-          item,
-          loading: false,
-          isMineItem: !artistId,
-          alreadyLiked
-        });
-      } catch (error) {
-        console.error(error);
-      }
+      doc.exists && this.setState({
+        item,
+        loading: false,
+        isMineItem: !artistId,
+        alreadyLiked
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 

@@ -15,6 +15,7 @@ class NewItem extends React.PureComponent {
     price: '',
     rating: 0,
     imageUrl: '',
+    likedBy: [],
     description: ''
   };
 

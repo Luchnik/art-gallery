@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import InputField from '../input-field/input-field.component';
 import Button from '../button/button.component';
 import { auth } from '../../firebase/auth';
-import { createUserProfile } from '../../firebase/firestore';
+import { createUserProfile } from '../../firebase/user-profile';
 
 class SignUp extends React.PureComponent {
 

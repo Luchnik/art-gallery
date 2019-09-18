@@ -2,7 +2,7 @@ import React from 'react';
 
 import Spinner from '../spinner/spinner.component';
 import Item from '../item/item.component';
-import { firestore } from '../../firebase/firestore';
+import collections from '../../firebase/collections';
 import './grid.styles.scss';
 
 class Grid extends React.PureComponent {
@@ -11,22 +11,20 @@ class Grid extends React.PureComponent {
     loading: true
   };
 
-  unsubscribeFromFirestore = null;
+  unsubscribeFromCollection = null;
 
   componentDidMount = () => {
     const userId = this.props.userId;
+    const collectionPath = `Users/${userId}/Gallery`;
 
-    this.unsubscribeFromFirestore = firestore.collection(`Users/${userId}/Gallery`).onSnapshot(snapshot => {
-      const items = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+    this.unsubscribeFromCollection = collections.subscribeToCollection(collectionPath, snapshot => {
+      const items = collections.mapCollectionToArray(snapshot);
       this.setState({ items, loading: false });
     });
   };
 
   componentWillUnmount = () => {
-    this.unsubscribeFromFirestore();
+    this.unsubscribeFromCollection();
   };
 
   render() {

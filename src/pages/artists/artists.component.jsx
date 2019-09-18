@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import Spinner from '../../components/spinner/spinner.component';
 import Artist from '../../components/artist/artist.component';
 import { withCurrentUser } from '../../hocs';
-import { firestore } from '../../firebase/firestore';
+import collections from '../../firebase/collections';
 import './artists.styles.scss';
 
 class Artists extends React.PureComponent {
@@ -13,14 +13,11 @@ class Artists extends React.PureComponent {
     loading: true
   };
 
-  unsubscribeFromFirestore = null;
+  unsubscribeFromCollection = null;
 
   componentDidMount = () => {
-    this.unsubscribeFromFirestore = firestore.collection(`Users`).onSnapshot(snapshot => {
-      const artists = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+    this.unsubscribeFromCollection = collections.subscribeToCollection(`Users`, snapshot => {
+      const artists = collections.mapCollectionToArray(snapshot);
 
       const sortedByRating = artists.sort( ( first, second ) => second.rating - first.rating );
 
@@ -35,7 +32,7 @@ class Artists extends React.PureComponent {
   };
 
   componentWillUnmount = () => {
-    this.unsubscribeFromFirestore();
+    this.unsubscribeFromCollection();
   };
 
   render() {

@@ -6,7 +6,7 @@ import Rating from '../../components/rating/rating.component';
 import Button from '../../components/button/button.component';
 import TextArea from '../../components/textarea/textarea.component';
 import InputField from '../../components/input-field/input-field.component';
-import { firestore } from '../../firebase/firestore';
+import documents from '../../firebase/documents';
 import { withCurrentUser } from '../../hocs';
 import './item-details.styles.scss';
 
@@ -42,12 +42,9 @@ class ItemDetails extends React.PureComponent {
     }
 
     try {
-      const itemRef = firestore.doc(docPath);
-      const doc = await itemRef.get();
-      const item = { ...doc.data() }
+      const item = await documents.getDocument(docPath);
       const alreadyLiked = currentUser ? item.likedBy.includes(currentUser.id) : false;
-
-      doc.exists && this.setState({
+      this.setState({
         item,
         loading: false,
         isMineItem: !artistId,
@@ -61,9 +58,10 @@ class ItemDetails extends React.PureComponent {
   deleteItem = async () => {
     const { currentUser, history, match } = this.props;
     const itemId = match.params.itemId;
+    const documentPath = `Users/${currentUser.id}/Gallery/${itemId}`;
 
     try {
-      await firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`).delete();
+      await documents.deleteDocument(documentPath);
       history.push('/');
     } catch (error) {
       console.error(error);
@@ -74,10 +72,10 @@ class ItemDetails extends React.PureComponent {
     if (this.state.isEditing) {
       const { currentUser, match } = this.props;
       const itemId = match.params.itemId;
+      const documentPath = `Users/${currentUser.id}/Gallery/${itemId}`;
 
       try {
-        const itemRef = firestore.doc(`Users/${currentUser.id}/Gallery/${itemId}`);
-        await itemRef.update(this.state.item);
+        await documents.updateDocument(documentPath, this.state.item);
       } catch (error) {
         console.error(error);
       }
@@ -91,13 +89,12 @@ class ItemDetails extends React.PureComponent {
   updateArtistsRating = async addRating => {
     const { match } = this.props;
     const artistId = match.params.artistId;
+    const documentPath = `Users/${artistId}`;
 
     try {
-      const artistRef = firestore.doc(`Users/${artistId}`);
-      const doc = await artistRef.get();
-      const artistsData = { ...doc.data() };
+      const artistsData = await documents.getDocument(documentPath);
       artistsData.rating = artistsData.rating + addRating;
-      await artistRef.update(artistsData);
+      await documents.updateDocument(documentPath, artistsData);
     } catch (error) {
       console.error(error);
     }
@@ -106,9 +103,9 @@ class ItemDetails extends React.PureComponent {
   toggleLike = async () => {
     const { currentUser, match } = this.props;
     const { artistId, itemId } = match.params;
+    const documentPath = `Users/${artistId}/Gallery/${itemId}`;
 
     try {
-      const itemRef = firestore.doc(`Users/${artistId}/Gallery/${itemId}`);
       const ratedItem = { ...this.state.item };
 
       let addRating = 0;
@@ -123,14 +120,14 @@ class ItemDetails extends React.PureComponent {
         addRating++;
       }
 
-      ratedItem.rating = ratedItem.likedBy.length;   
-      await itemRef.update(ratedItem);
+      ratedItem.rating = ratedItem.likedBy.length;
+      await documents.updateDocument(documentPath, ratedItem);
 
       this.setState(prevState => ({
         item: ratedItem,
         alreadyLiked: !prevState.alreadyLiked
       }), () => {
-        // this.updateArtistsRating(addRating);
+        this.updateArtistsRating(addRating);
       });
     } catch (error) {
       console.error(error);

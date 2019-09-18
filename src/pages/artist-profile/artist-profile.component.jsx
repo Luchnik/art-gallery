@@ -3,7 +3,7 @@ import React from 'react';
 import Spinner from '../../components/spinner/spinner.component';
 import Rating from '../../components/rating/rating.component';
 import Grid from '../../components/grid/grid.component';
-import { firestore } from '../../firebase/firestore';
+import documents from '../../firebase/documents';
 import './artist-profile.styles.scss';
 
 class ArtistProfile extends React.Component {
@@ -15,15 +15,11 @@ class ArtistProfile extends React.Component {
 
   componentDidMount = async () => {
     const { match } = this.props;
-    const artistId = match.params.artistId;
+    const documentPath = `Users/${match.params.artistId}`;
 
     try {
-      const artistRef = firestore.doc(`Users/${artistId}`);
-      const doc = await artistRef.get();
-      doc.exists && this.setState({
-        artist: { ...doc.data() },
-        loading: false
-      });
+      const artist = await documents.getDocument(documentPath);
+      this.setState({ artist, loading: false });
     } catch (error) {
       console.error(error);
     }

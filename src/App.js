@@ -9,7 +9,7 @@ import ItemDetails from './pages/item-details/item-details.component';
 import SignInAndSignUp from './pages/signin-and-signup/signin-and-signup.component';
 import NewItem from './pages/new-item/new-item.component';
 import { auth } from './firebase/auth';
-import { createUserProfile } from './firebase/firestore';
+import { createUserProfile } from './firebase/user-profile';
 import './app.scss';
 
 export const UserContext = React.createContext(null);

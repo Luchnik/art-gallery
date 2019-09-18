@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import InputField from '../../components/input-field/input-field.component';
 import Button from '../../components/button/button.component';
 import TextArea from '../../components/textarea/textarea.component';
-import { firestore } from '../../firebase/firestore';
+import documents from '../../firebase/documents';
 import { auth } from '../../firebase/auth';
 import './new-item.styles.scss';
 
@@ -32,9 +32,11 @@ class NewItem extends React.PureComponent {
   handleSubmit = async $event => {
     $event.preventDefault();
 
+    const userId = auth.currentUser.uid;
+    const itemCollectionPath = `/Users/${userId}/Gallery`;
+
     try {
-      const userId = auth.currentUser.uid;
-      await firestore.collection(`/Users/${userId}/Gallery`).add(this.state);
+      await documents.addNewDocument(itemCollectionPath, this.state);
       this.props.history.push('/');
     } catch (error) {
       console.error(error);

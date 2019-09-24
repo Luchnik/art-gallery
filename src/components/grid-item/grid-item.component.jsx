@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import './item.styles.scss';
+import './grid-item.styles.scss';
 
-const Item = ({ itemId, title, price, imageUrl, history, match }) => {
+const GridItem = ({ itemId, title, price, imageUrl, history, match }) => {
 
   const itemPushTarget = match.url === '/' ? itemId : `${match.url}/${itemId}`;
 
@@ -25,4 +25,4 @@ const Item = ({ itemId, title, price, imageUrl, history, match }) => {
   );
 }
 
-export default withRouter(Item);
+export default withRouter(GridItem);

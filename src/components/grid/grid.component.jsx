@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Spinner from '../spinner/spinner.component';
-import Item from '../item/item.component';
+import GridItem from '../grid-item/grid-item.component';
 import collections from '../../firebase/collections';
 import './grid.styles.scss';
 
@@ -38,7 +38,7 @@ class Grid extends React.PureComponent {
       <div className="grid-container">
         {
           items.map(({ id, ...restProps }) => (
-            <Item
+            <GridItem
               key={id}
               itemId={id}
               {...restProps} />

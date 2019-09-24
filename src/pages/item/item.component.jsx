@@ -3,9 +3,8 @@ import { withRouter } from 'react-router-dom';
 
 import Spinner from '../../components/spinner/spinner.component';
 import Rating from '../../components/rating/rating.component';
-import ActionButton from '../../components/action-buttons/action-buttons.component';
-import TextArea from '../../components/textarea/textarea.component';
-import InputField from '../../components/input-field/input-field.component';
+import ActionButtons from '../../components/action-buttons/action-buttons.component';
+import ItemEdit from '../../components/item-edit/item-edit.component';
 import documents from '../../firebase/documents';
 import { withCurrentUser } from '../../hocs';
 import './item.styles.scss';
@@ -141,47 +140,6 @@ class Item extends React.PureComponent {
     this.setState({ item });
   };
 
-  renderItemEdit = () => {
-    const { item: { title, price, imageUrl, description } } = this.state;
-
-    return (
-      <div className="editing-container">
-        <h2 className="title">
-          <InputField
-            name="title"
-            type="text"
-            placeholder="Title"
-            value={title}
-            onInputChange={this.handleChange}
-            required />
-          <InputField
-            min="0"
-            name="price"
-            type="number"
-            placeholder="Price"
-            value={price}
-            onInputChange={this.handleChange}
-            required />
-          <InputField
-            name="imageUrl"
-            type="text"
-            placeholder="Image URL"
-            value={imageUrl}
-            onInputChange={this.handleChange}
-            required />
-          <div className="text-area-container">
-            <TextArea
-              name="description"
-              placeholder="Description"
-              value={description}
-              onInputChange={this.handleChange}
-              required />
-          </div>
-        </h2>
-      </div>
-    );
-  };
-
   renderItemDetails = () => {
     const { item: { title, price, rating, description } } = this.state;
 
@@ -204,7 +162,7 @@ class Item extends React.PureComponent {
   };
 
   render() {
-    const { item: { imageUrl }, loading, isEditing, isMineItem, alreadyLiked } = this.state;
+    const { item, loading, isEditing, isMineItem, alreadyLiked } = this.state;
     const { currentUser } = this.props;
 
     const actioButtonProps = {
@@ -223,14 +181,16 @@ class Item extends React.PureComponent {
         <div
           className="image-container"
           style={{
-            backgroundImage: `url(${imageUrl})`,
+            backgroundImage: `url(${item.imageUrl})`,
             opacity: isEditing ? 0.3 : 1
           }} />
 
         <div className="item-description">
-          {isEditing ? this.renderItemEdit() : this.renderItemDetails()}
+          {
+            isEditing ? <ItemEdit item={item} handleChange={this.handleChange} /> : this.renderItemDetails()
+          }
           <div className="action-buttons">
-            <ActionButton { ...actioButtonProps } />
+            <ActionButtons { ...actioButtonProps } />
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import Spinner from '../../components/spinner/spinner.component';
 import Rating from '../../components/rating/rating.component';
-import Button from '../../components/button/button.component';
+import ActionButton from '../../components/action-buttons/action-buttons.component';
 import TextArea from '../../components/textarea/textarea.component';
 import InputField from '../../components/input-field/input-field.component';
 import documents from '../../firebase/documents';
@@ -203,53 +203,23 @@ class Item extends React.PureComponent {
     );
   };
 
-  renderActionButtons = () => {
-    const { isMineItem, isEditing, alreadyLiked } = this.state;
-
-    if ( isMineItem ) {
-      return (
-        <React.Fragment>
-          <Button
-            type="submit"
-            onClick={() => this.editItem()}
-            small
-            styleType="secondary">
-            {isEditing ? 'Done' : 'Edit'}
-          </Button>
-          <Button
-            type="submit"
-            onClick={() => this.deleteItem()}
-            small
-            styleType="primary">
-            Delete
-          </Button>
-        </React.Fragment>
-      );
-    }
-
-    if ( !isMineItem && this.props.currentUser ) {
-      return (
-        <Button
-          type="submit"
-          onClick={() => this.toggleLike()}
-          small
-          alreadyLiked={alreadyLiked}
-          styleType="like">
-          {alreadyLiked ? 'Dislike It' : 'Like It'}
-        </Button>
-      );
-    }
-  };
-
   render() {
-    const { item: { imageUrl }, loading, isEditing } = this.state;
+    const { item: { imageUrl }, loading, isEditing, isMineItem, alreadyLiked } = this.state;
+    const { currentUser } = this.props;
+
+    const actioButtonProps = {
+      isMineItem, isEditing, alreadyLiked, currentUser,
+      editItem: this.editItem,
+      deleteItem: this.deleteItem,
+      toggleLike: this.toggleLike
+    };
 
     if ( loading ) {
       return <Spinner />
     }
 
     return (
-      <div className="item-details-container">
+      <div className="item-container">
         <div
           className="image-container"
           style={{
@@ -260,7 +230,7 @@ class Item extends React.PureComponent {
         <div className="item-description">
           {isEditing ? this.renderItemEdit() : this.renderItemDetails()}
           <div className="action-buttons">
-            { this.renderActionButtons() }
+            <ActionButton { ...actioButtonProps } />
           </div>
         </div>
       </div>

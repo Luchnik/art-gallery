@@ -9,7 +9,7 @@ const GridItem = ({ itemId, title, price, imageUrl, history, match }) => {
 
   return (
     <div
-      className="item-container"
+      className="grid-item-container"
       onClick={() => history.push(itemPushTarget)}>
       <div
         className="item-preview"

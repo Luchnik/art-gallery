@@ -2,9 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Spinner from '../../components/spinner/spinner.component';
-import Rating from '../../components/rating/rating.component';
 import ActionButtons from '../../components/action-buttons/action-buttons.component';
 import ItemEdit from '../../components/item-edit/item-edit.component';
+import ItemDetails from '../../components/item-details/item-details.component';
 import documents from '../../firebase/documents';
 import { withCurrentUser } from '../../hocs';
 import './item.styles.scss';
@@ -140,27 +140,6 @@ class Item extends React.PureComponent {
     this.setState({ item });
   };
 
-  renderItemDetails = () => {
-    const { item: { title, price, rating, description } } = this.state;
-
-    return (
-      <React.Fragment>
-        <h2 className="title">
-          {title}
-        </h2>
-        <label className="item-rating">
-          <Rating rating={rating} />
-        </label>
-        <label className="price">
-          &#8372; {price}
-        </label>
-        <p className="description">
-          {description}
-        </p>
-      </React.Fragment>
-    );
-  };
-
   render() {
     const { item, loading, isEditing, isMineItem, alreadyLiked } = this.state;
     const { currentUser } = this.props;
@@ -187,7 +166,8 @@ class Item extends React.PureComponent {
 
         <div className="item-description">
           {
-            isEditing ? <ItemEdit item={item} handleChange={this.handleChange} /> : this.renderItemDetails()
+            isEditing ? <ItemEdit item={item} handleChange={this.handleChange} /> : 
+            <ItemDetails item={item} />
           }
           <div className="action-buttons">
             <ActionButtons { ...actioButtonProps } />

@@ -5,7 +5,7 @@ import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import Artists from './pages/artists/artists.component';
 import ArtistProfile from './pages/artist-profile/artist-profile.component';
-import ItemDetails from './pages/item-details/item-details.component';
+import Item from './pages/item/item.component';
 import SignInAndSignUp from './pages/signin-and-signup/signin-and-signup.component';
 import NewItem from './pages/new-item/new-item.component';
 import { auth } from './firebase/auth';
@@ -55,9 +55,9 @@ class App extends React.Component {
               <Route path="/new" component={NewItem} />
               <Route path="/artists" exact component={Artists} />
               <Route path="/artists/:artistId" exact component={ArtistProfile} />
-              <Route path="/artists/:artistId/:itemId" exact component={ItemDetails} />
+              <Route path="/artists/:artistId/:itemId" exact component={Item} />
               <Route path="/signin" component={SignInAndSignUp} />
-              <Route path="/:itemId" exact component={ItemDetails} />
+              <Route path="/:itemId" exact component={Item} />
             </Switch>
           </UserContext.Provider>
         </main>

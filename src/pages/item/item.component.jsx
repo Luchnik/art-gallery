@@ -8,9 +8,9 @@ import TextArea from '../../components/textarea/textarea.component';
 import InputField from '../../components/input-field/input-field.component';
 import documents from '../../firebase/documents';
 import { withCurrentUser } from '../../hocs';
-import './item-details.styles.scss';
+import './item.styles.scss';
 
-class ItemDetails extends React.PureComponent {
+class Item extends React.PureComponent {
 
   state = {
     item: {},
@@ -268,4 +268,4 @@ class ItemDetails extends React.PureComponent {
   }
 }
 
-export default withRouter(withCurrentUser(ItemDetails));
+export default withRouter(withCurrentUser(Item));
